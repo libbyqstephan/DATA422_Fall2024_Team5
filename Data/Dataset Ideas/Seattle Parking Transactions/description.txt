@@ -1,0 +1,3 @@
+link:https://data.seattle.gov/Transportation/Paid-Parking-Transaction-Data/gg89-k5p6/about_data
+
+A csv of parking transactions in the city of seattle.
