@@ -1,4 +1,4 @@
-Seattle Building energy details from two 2019 and 2020, could predict star rating or emissions.
+Seattle Building energy details from two 2019 and 2022, could predict star rating or emissions.
 
 link:
 https://data.seattle.gov/Permitting/2019-Building-Energy-Benchmarking/3th6-ticf/about_data
