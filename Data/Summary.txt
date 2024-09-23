@@ -1,0 +1,9 @@
+Where the data came from
+
+Special properties
+
+Amount
+
+Proposed wrangling techniques (how you plan to join and why
+
+Storage Method
