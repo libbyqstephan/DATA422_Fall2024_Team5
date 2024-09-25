@@ -1,4 +1,6 @@
 Where the data came from
+Our data is comprised of two sets collected by the City of Seattle through their Energy Benchmarking Program, which aims to track and report energy performance throughout the city. This law was put into effect in an attempt to increase transparency for potential homeowners before they buy the home and realize how expensive it is to maintain. As a product of this increased level of information, lawmakers are expecting energy efficeincy to become a greater focus in the creation of buildings in the future. 
+
 
 Special properties
 
