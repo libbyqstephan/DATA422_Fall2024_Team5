@@ -1,7 +1,7 @@
-#Data Summary
-##Team 5
-##Data 422
-##9/27/24
+Data Summary
+Team 5
+Data 422
+9/27/24
 
 The data we are analyzing is comprised of two sets collected by the City of Seattle through their Energy Benchmarking Program. This initiative aims to track and report energy performance throughout the city to increase transparency about the price of heat and energy for potential homeowners before they buy the home and realize maintenance expenses are high. As an additional benefit of this increased level of information, lawmakers are expecting energy efficiency to become a greater focus in the creation of buildings in the future since efficient homes are also cheaper. This yearly collection of data provides a rigorous set of information for our purposes and is directly in line with our goal of predicting the overall energy efficiency of a building, as well as identifying which type of building is most efficient. 
 
