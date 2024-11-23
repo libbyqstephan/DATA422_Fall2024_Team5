@@ -1,0 +1,10 @@
+#PUT THESE IN YOUR TERMINAL OR COMMAND PROMPT/Powershell
+
+more info here: https://shiny.posit.co/py/docs/install-create-run.html
+
+
+
+
+
+pip install shiny
+shiny run --reload --launch-browser app_dir/app.py
