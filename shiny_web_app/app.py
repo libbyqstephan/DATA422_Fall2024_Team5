@@ -5,7 +5,17 @@ import numpy as np
 
 with ui.navset_pill(id="tab"):  
     with ui.nav_panel("Overview"):
-        "Panel A content"
+        ui.markdown(
+        """
+        **Welcome to the Overview!**  
+        This is the first tab in the app.
+
+        - Here you can add bullet points.
+        - Add more descriptive text with breaks.
+        
+        For line breaks, just add an empty line in Markdown.  
+        This is another line.
+        """)
 
     with ui.nav_panel("Tabulations"):
         "Panel B content"
