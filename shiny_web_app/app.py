@@ -5,16 +5,17 @@ import numpy as np
 import pandas as pd
 from pathlib import Path
 
-import os
-print(os.getcwd())
+
 
 @reactive.calc
 def dat():
-    infile = Path(__file__).parent / "/Data/Seattle_Building_Data_Cleaned.csv"
+    infile = Path(__file__).parent.parent /  "Data" / "Seattle_Building_Data_Cleaned.csv"
     return pd.read_csv(infile)
 
+ui.panel_title("Team 5 Shiny Web App")
+
 with ui.navset_pill(id="tab"):  
-    ui.panel_title("Team 5 Shiny Web App")
+
     with ui.nav_panel("Overview"):
         ui.markdown(
         """
