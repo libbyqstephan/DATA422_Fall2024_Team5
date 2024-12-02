@@ -1,14 +1,28 @@
-from shiny import render, ui
+from shiny import render, ui, reactive
 from shiny.express import input, ui
 import matplotlib.pyplot as plt
 import numpy as np
+import pandas as pd
+from pathlib import Path
+
+import os
+print(os.getcwd())
+
+
+@reactive.calc
+def dat():
+    infile = Path(__file__).parent / "Data/Seattle_Building_Data_Cleaned.csv"
+    return pd.read_csv(infile)
 
 with ui.navset_pill(id="tab"):  
     with ui.nav_panel("Overview"):
         "Panel A content"
 
     with ui.nav_panel("Tabulations"):
-        "Panel B content"
+        @render.data_frame
+        def frame():
+            return dat()
+        
 
     with ui.nav_panel("Visuals & Charts"):
         "Panel C content"
