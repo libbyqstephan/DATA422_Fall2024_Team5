@@ -8,10 +8,9 @@ from pathlib import Path
 import os
 print(os.getcwd())
 
-
 @reactive.calc
 def dat():
-    infile = Path(__file__).parent / "Data/Seattle_Building_Data_Cleaned.csv"
+    infile = Path(__file__).parent / "/Data/Seattle_Building_Data_Cleaned.csv"
     return pd.read_csv(infile)
 
 with ui.navset_pill(id="tab"):  
