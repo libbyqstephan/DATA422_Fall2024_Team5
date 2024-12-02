@@ -14,8 +14,19 @@ def dat():
     return pd.read_csv(infile)
 
 with ui.navset_pill(id="tab"):  
+    ui.panel_title("Team 5 Shiny Web App")
     with ui.nav_panel("Overview"):
-        "Panel A content"
+        ui.markdown(
+        """
+        **Welcome to the Overview!**  
+        This is the first tab in the app.
+
+        - Here you can add bullet points.
+        - Add more descriptive text with breaks.
+        
+        For line breaks, just add an empty line in Markdown.  
+        This is another line.
+        """)
 
     with ui.nav_panel("Tabulations"):
         @render.data_frame
@@ -37,7 +48,6 @@ with ui.navset_pill(id="tab"):
         "Page D content"
         
     with ui.nav_panel("test"):
-        ui.panel_title("I have No Idea What I am Doing")
         ui.input_slider("p", "Please Enter Phone Number", 1111111111, 9999999999, 0)
 
 
