@@ -4,6 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 
 with ui.navset_pill(id="tab"):  
+    ui.panel_title("Team 5 Shiny Web App")
     with ui.nav_panel("Overview"):
         ui.markdown(
         """
@@ -34,7 +35,6 @@ with ui.navset_pill(id="tab"):
         "Page D content"
         
     with ui.nav_panel("test"):
-        ui.panel_title("I have No Idea What I am Doing")
         ui.input_slider("p", "Please Enter Phone Number", 1111111111, 9999999999, 0)
 
 
