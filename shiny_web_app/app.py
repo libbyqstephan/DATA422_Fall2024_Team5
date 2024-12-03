@@ -7,8 +7,8 @@ from pathlib import Path
 
 
 
-@reactive.calc
-def dat():
+@reactive.calc #load cleaned data from csv into dataframe
+def cleaned_dat():
     infile = Path(__file__).parent.parent /  "Data" / "Seattle_Building_Data_Cleaned.csv"
     return pd.read_csv(infile)
 
@@ -32,7 +32,7 @@ with ui.navset_pill(id="tab"):
     with ui.nav_panel("Tabulations"):
         @render.data_frame
         def frame():
-            return dat()
+            return cleaned_dat()
         
 
     with ui.nav_panel("Visuals & Charts"):
