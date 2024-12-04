@@ -55,7 +55,7 @@ with ui.navset_pill(id="tab"):
         @render.plot(alt="A histogram of year built")
         def plot_histogram():
             # Load the reactive dataset
-            df = cleaned_dat()
+            df = dat()
 
             # Choose a column for the histogram (adjust as needed)
             column_data = df["YearBuilt"]
@@ -86,7 +86,7 @@ with ui.navset_pill(id="tab"):
         @render.plot #Plot the decision tree and mark the path it takes based on the input sliders
         def decision_tree_plot():
             clf = train_classifier()
-            fig, ax = plt.subplots(figsize=(30, 30), dpi=150)
+            fig, ax = plt.subplots(figsize=(40, 40), dpi=150)
             plot_tree(clf, feature_names=['Electricity(kBtu)', 'SteamUse(kBtu)', 'NaturalGas(kBtu)', 'PropertyGFATotal', 'SourceEUI(kBtu/sf)'], filled=False, ax=ax)
 
          #Create a sample with the correct feature names
@@ -115,7 +115,7 @@ with ui.navset_pill(id="tab"):
                 center = bbox.transformed(ax.transData.inverted()).get_points().mean(axis=0)
                 ax.annotate('Decision Node', xy=center,
                             xytext=(center[0], center[1] - 0.1),
-                            arrowprops=dict(facecolor='black', shrink=0.05))
+                            arrowprops=dict(facecolor='Red', shrink=0.05))
 
             return fig
         
