@@ -79,11 +79,11 @@ with ui.navset_pill(id="tab"):
         
         
     with ui.nav_panel("test"):
-        ui.input_slider("p", "Please Enter Phone Number", 1111111111, 9999999999, 0)
+        ui.input_slider("p", "Please Enter Phone Number", 1111111111, 9999999999, 0) #add slider for phone number, value goes to input.p()
 
 
         @render.code
-        def txt():
+        def txt(): #code to display the phone number formatted
             s = str(input.p())
             if input.p()**2 - 6741414522*input.p() + 1.06669e19 == 0:
                 return "lol you found me"
