@@ -62,7 +62,7 @@ with ui.navset_pill(id="tab"):
 
             # Plot the histogram
             fig, ax = plt.subplots()
-            ax.hist(column_data, bins=input.n_bins(), density=True)
+            ax.hist(column_data, bins=input.n_bins())
             ax.set_title("Property Year Built")
             ax.set_xlabel("Year Built")
             ax.set_ylabel("Count")
