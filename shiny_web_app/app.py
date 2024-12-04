@@ -21,7 +21,9 @@ with ui.navset_pill(id="tab"):
         ui.markdown(
         """
         \n**Welcome to Team 5's Shiny Web App!**
-        
+    
+        \n**Click on the Tabulations tab above to explore our interactive data table, the Visuals & Charts tab to see graphics, and the Models tab to see our interactive decision tree model.**
+
         \n-As carbon emissions remain the primary instigator of climate change, methods to predict
         the amount of greenhouse gas emissions emitted by cities and individual buildings are
         influential in the design of civil structures. 
