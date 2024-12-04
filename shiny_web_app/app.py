@@ -49,6 +49,26 @@ with ui.navset_pill(id="tab"):
                 """
         )
 
+        # slider histogram of YearBuilt
+        ui.input_slider("n_bins", "Number of bins", 1, 100, 20)
+
+        @render.plot(alt="A histogram of year built")
+        def plot_histogram():
+            # Load the reactive dataset
+            df = cleaned_dat()
+
+            # Choose a column for the histogram (adjust as needed)
+            column_data = df["YearBuilt"]
+
+            # Plot the histogram
+            fig, ax = plt.subplots()
+            ax.hist(column_data, bins=input.n_bins(), density=True)
+            ax.set_title("Property Year Built")
+            ax.set_xlabel("Year Built")
+            ax.set_ylabel("Count")
+
+            return fig
+
 
     with ui.nav_panel("Models"):
         ui.markdown(
