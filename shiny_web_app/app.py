@@ -61,20 +61,41 @@ with ui.navset_pill(id="tab"):
         ui.input_slider("NaturalGas", "Natural Gas (kBtu)", min(X['NaturalGas(kBtu)']), max(X['NaturalGas(kBtu)']), step=1, value=min(X['NaturalGas(kBtu)'])),
         ui.input_slider("PropertyGFATotal", "Property GFA Total", min(X['PropertyGFATotal']), max(X['PropertyGFATotal']), step=1, value=min(X['PropertyGFATotal'])),
         ui.input_slider("SourceEUI", "Source EUI (kBtu/sf)", min(X['SourceEUI(kBtu/sf)']), max(X['SourceEUI(kBtu/sf)']), step=1, value=min(X['SourceEUI(kBtu/sf)'])),
-        @render.plot
+        
+        @render.plot #Plot the decision tree and mark the path it takes based on the input sliders
         def decision_tree_plot():
             clf = train_classifier()
-            fig, ax = plt.subplots(figsize=(12, 8))
+            fig, ax = plt.subplots(figsize=(20, 20), dpi=600)
             plot_tree(clf, feature_names=['Electricity(kBtu)', 'SteamUse(kBtu)', 'NaturalGas(kBtu)', 'PropertyGFATotal', 'SourceEUI(kBtu/sf)'], filled=True, ax=ax)
-    
-            # Highlight the path based on slider inputs
-            sample = np.array([[input['Electricity'](), input['SteamUse'](), input['NaturalGas'](), input['PropertyGFATotal'](), input['SourceEUI']()]])
+
+         #Create a sample with the correct feature names
+            sample = pd.DataFrame({
+                'Electricity(kBtu)': [input['Electricity']()],
+                'SteamUse(kBtu)': [input['SteamUse']()],
+                'NaturalGas(kBtu)': [input['NaturalGas']()],
+                'PropertyGFATotal': [input['PropertyGFATotal']()],
+                'SourceEUI(kBtu/sf)': [input['SourceEUI']()]
+            })
+
+            #Get the decision path for the sample
             path = clf.decision_path(sample).toarray().astype(bool)[0]
-            for node in np.where(path)[0]:
-                if isinstance(ax.get_children()[node], Patch):
-                    ax.get_children()[node].set_facecolor('red')
-                    ax.get_children()[node].set_linewidth(2)
-    
+            node_indicator = clf.decision_path(sample)
+            leaf_id = clf.apply(sample)
+
+            #Highlight the nodes in the path
+            for node_id in np.where(path)[0]:
+                if isinstance(ax.get_children()[node_id], plt.Text):
+                    ax.get_children()[node_id].set_bbox(dict(facecolor='red', alpha=0.5))
+
+            #Add an arrow to the bottom-most node
+            bottom_node = np.where(path)[0][-1]
+            if isinstance(ax.get_children()[bottom_node], plt.Text):
+                bbox = ax.get_children()[bottom_node].get_window_extent()
+                center = bbox.transformed(ax.transData.inverted()).get_points().mean(axis=0)
+                ax.annotate('Decision Node', xy=center,
+                            xytext=(center[0], center[1] - 0.1),
+                            arrowprops=dict(facecolor='black', shrink=0.05))
+
             return fig
         
         
@@ -104,7 +125,7 @@ def train_classifier():
 
 @reactive.calc #reactive function to load the cleaned data
 def dat():
-    cleaned_data_file = Path(__file__).parent.parent /  "Data" / "Seattle_Building_Data_Cleaned.csv"
+    cleaned_data_file = Path(__file__).parent.parent / "Data" / "Seattle_Building_Data_Cleaned.csv"
     data = pd.read_csv(cleaned_data_file)
     data = data.drop(columns=["DataYear", "ZipCode", "OSEBuildingID"]) #removing these columns because it reduces clutter
     return data
