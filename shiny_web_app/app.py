@@ -68,7 +68,7 @@ with ui.navset_pill(id="tab"):
 
             # Plot the histogram
             fig, ax = plt.subplots()
-            ax.hist(column_data, bins=input.n_bins(), density=True)
+            ax.hist(column_data, bins=input.n_bins())
             ax.set_title("Property Year Built")
             ax.set_xlabel("Year Built")
             ax.set_ylabel("Count")
@@ -88,6 +88,8 @@ with ui.navset_pill(id="tab"):
         ui.input_slider("NaturalGas", "Natural Gas (kBtu)", min(X['NaturalGas(kBtu)']), max(X['NaturalGas(kBtu)']), step=1, value=min(X['NaturalGas(kBtu)'])),
         ui.input_slider("PropertyGFATotal", "Property GFA Total", min(X['PropertyGFATotal']), max(X['PropertyGFATotal']), step=1, value=min(X['PropertyGFATotal'])),
         ui.input_slider("SourceEUI", "Source EUI (kBtu/sf)", min(X['SourceEUI(kBtu/sf)']), max(X['SourceEUI(kBtu/sf)']), step=1, value=min(X['SourceEUI(kBtu/sf)'])),
+        
+        #TODO: Add a dropdown menu with preset options for the sliders?
         
         @render.plot #Plot the decision tree and mark the path it takes based on the input sliders
         def decision_tree_plot():
@@ -112,7 +114,7 @@ with ui.navset_pill(id="tab"):
             #Highlight the nodes in the path
             for node_id in np.where(path)[0]:
                 if isinstance(ax.get_children()[node_id], plt.Text):
-                    ax.get_children()[node_id].set_bbox(dict(facecolor='yellow', alpha=0.5))
+                    ax.get_children()[node_id].set_bbox(dict(facecolor='Yellow', alpha=0.5))
 
             #Add an arrow to the bottom-most node
             bottom_node = np.where(path)[0][-1]
@@ -121,7 +123,7 @@ with ui.navset_pill(id="tab"):
                 center = bbox.transformed(ax.transData.inverted()).get_points().mean(axis=0)
                 ax.annotate('Decision Node', xy=center,
                             xytext=(center[0], center[1] - 0.1),
-                            arrowprops=dict(facecolor='Red', shrink=0.05))
+                            arrowprops=dict(facecolor='Black', shrink=0.05))
 
             return fig
         
