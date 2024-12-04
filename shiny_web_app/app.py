@@ -20,14 +20,20 @@ with ui.navset_pill(id="tab"):
     with ui.nav_panel("Overview"):
         ui.markdown(
         """
-        **Welcome to the Overview!**  
-        This is the first tab in the app.
-
-        - Here you can add bullet points.
-        - Add more descriptive text with breaks.
+        \n**Welcome to Team 5's Shiny Web App!**
         
-        For line breaks, just add an empty line in Markdown.  
-        This is another line.
+        \n-As carbon emissions remain the primary instigator of climate change, methods to predict
+        the amount of greenhouse gas emissions emitted by cities and individual buildings are
+        influential in the design of civil structures. 
+        \n-By researching what aspects of a building's
+        infrastructure correlate most to overall greenhouse gas emissions, potential actions to create
+        more energy-efficient systems or discourage excessive carbon pollution will become more
+        feasible.
+        \n-Our team's main objective is to determine what features of a building influence pollution
+        levels, specifically, their greenhouse gas emission intensity measured by total GHG emissions
+        divided by total area. 
+
+        \n-Out of all the models tested, we found the most success in using the decision tree classifier. The original model was improved through Principal Component Analysis, as well as hyperparameter tuning. The final model has an accuracy rate of 87.71%, which was an improvement of 12.50% from the original model.
         """)
 
     with ui.nav_panel("Tabulations"):
