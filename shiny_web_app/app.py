@@ -74,6 +74,7 @@ with ui.navset_pill(id="tab"):
         ui.markdown(
             """
             ### Interactive Decision Tree Classifier
+            Use the sliders to input the values for the features and see how the path that the decision tree classifier uses to classify the input changes.
             """
         )
         ui.input_slider("Electricity", "Electricity (kBtu)", min(X['Electricity(kBtu)']), max(X['Electricity(kBtu)']), step=1, value=min(X['Electricity(kBtu)'])),
@@ -85,8 +86,8 @@ with ui.navset_pill(id="tab"):
         @render.plot #Plot the decision tree and mark the path it takes based on the input sliders
         def decision_tree_plot():
             clf = train_classifier()
-            fig, ax = plt.subplots(figsize=(20, 20), dpi=600)
-            plot_tree(clf, feature_names=['Electricity(kBtu)', 'SteamUse(kBtu)', 'NaturalGas(kBtu)', 'PropertyGFATotal', 'SourceEUI(kBtu/sf)'], filled=True, ax=ax)
+            fig, ax = plt.subplots(figsize=(30, 30), dpi=150)
+            plot_tree(clf, feature_names=['Electricity(kBtu)', 'SteamUse(kBtu)', 'NaturalGas(kBtu)', 'PropertyGFATotal', 'SourceEUI(kBtu/sf)'], filled=False, ax=ax)
 
          #Create a sample with the correct feature names
             sample = pd.DataFrame({
@@ -105,7 +106,7 @@ with ui.navset_pill(id="tab"):
             #Highlight the nodes in the path
             for node_id in np.where(path)[0]:
                 if isinstance(ax.get_children()[node_id], plt.Text):
-                    ax.get_children()[node_id].set_bbox(dict(facecolor='red', alpha=0.5))
+                    ax.get_children()[node_id].set_bbox(dict(facecolor='yellow', alpha=0.5))
 
             #Add an arrow to the bottom-most node
             bottom_node = np.where(path)[0][-1]
