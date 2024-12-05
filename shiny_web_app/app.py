@@ -24,18 +24,28 @@ with ui.navset_pill(id="tab"):
     
         \n**Click on the Tabulations tab above to explore our interactive data table, the Visuals & Charts tab to see graphics, and the Models tab to see our interactive decision tree model.**
 
-        \n-As carbon emissions remain the primary instigator of climate change, methods to predict
+        \nThe data we are analyzing is a dataset collected by the City of Seattle through their Energy Benchmarking Program. This initiative aims to track and report energy performance throughout the city to increase transparency about the price of heat and energy for potential homeowners before they buy the home and realize maintenance expenses are high. As an additional benefit of this increased level of information, lawmakers are expecting energy efficiency to become a greater focus in the creation of buildings in the future since efficient homes are also cheaper. This yearly collection of data provides a rigorous set of information for our purposes and is directly in line with our goal of predicting the overall energy efficiency of a building, as well as identifying which type of building is most efficient.
+
+        \nThe factors in this dataset are somewhat unique in their level of detail. The dataset includes information about the building itself, such as the type of fuel they use for heat and electricity, their overall greenhouse gas emissions, and primary uses for the building, but also the level of compliance with the ordinance in the past year. Several different kinds of buildings are represented, from schools, office buildings, hotels, and self-storage units, which builds even more variety and context for analysis.
+
+        \nThe dataset contains information from the year 2022 with 3654 rows, each representing a building, and 42 columns.
+
+        \nAs carbon emissions remain the primary instigator of climate change, methods to predict
         the amount of greenhouse gas emissions emitted by cities and individual buildings are
         influential in the design of civil structures. 
-        \n-By researching what aspects of a building's
+
+        \nBy researching what aspects of a building's
         infrastructure correlate most to overall greenhouse gas emissions, potential actions to create
         more energy-efficient systems or discourage excessive carbon pollution will become more
         feasible.
-        \n-Our team's main objective is to determine what features of a building influence pollution
+
+        \nOur team's main objective is to determine what features of a building influence pollution
         levels, specifically, their greenhouse gas emission intensity measured by total GHG emissions
         divided by total area. 
 
-        \n-Out of all the models tested, we found the most success in using the decision tree classifier. The original model was improved through Principal Component Analysis, as well as hyperparameter tuning. The final model has an accuracy rate of 87.71%, which was an improvement of 12.50% from the original model.
+        \nOut of all the models tested, we found the most success in using the decision tree classifier. The original model was improved through Principal Component Analysis, as well as hyperparameter tuning. 
+        
+        \n**The final model has an accuracy rate of 87.71%, which was an improvement of 12.50% from the original model.**
         """)
 
     with ui.nav_panel("Tabulations"):
