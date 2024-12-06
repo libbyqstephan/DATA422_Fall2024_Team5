@@ -149,6 +149,24 @@ with ui.navset_pill(id="tab"):
             
             return plt.gcf()
 
+        # box plots
+        ui.input_slider(
+            "slider",
+            "Select Range of Values",
+            0,
+            42.35,
+            [0,42.35]
+        )
+
+        @render.plot
+        def plot_box():
+            df = dat()
+            
+            df = df.loc[(df["GHGEmissionsIntensity"] >= input.slider()[0]) & (df["GHGEmissionsIntensity"] < input.slider()[1]), ["GHGEmissionsIntensity", "BuildingType"]].groupby("BuildingType").boxplot(subplots = False, vert = False, grid=False, xlabel= "GHG Emissions Intensity", ylabel = "Building Type")
+            plt.yticks(range(1,9), ['Campus','Multifamily HR (10+)', 'Multifamily LR (1-4)', 'Multifamily MR (5-9)', 'NonResidential', 'Nonresidential COS', 'Nonresidential WA','SPS-District K-12'])
+            plt.title("GHG Emissions Intensity Based on Building Type")
+            return plt.gcf()
+
 
     with ui.nav_panel("Models"):
         ui.markdown(
