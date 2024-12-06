@@ -13,6 +13,10 @@ dtc_data = dtc_data.dropna()
 X = dtc_data[['Electricity(kBtu)', 'SteamUse(kBtu)', 'NaturalGas(kBtu)', 'PropertyGFATotal', 'SourceEUI(kBtu/sf)']]
 y = dtc_data[['GHGIntensityCluster']]
 
+selected = dtc_data["GHGIntensityCluster"].unique().astype(str)
+selected = selected.tolist()
+selected.sort()
+
 ui.panel_title("Team 5 Shiny Web App")
 
 with ui.navset_pill(id="tab"):  
@@ -86,6 +90,32 @@ with ui.navset_pill(id="tab"):
             ax.set_ylabel("Count")
 
             return fig
+
+        # interactive clustering
+        ui.input_checkbox_group(
+                "clusters",
+                "Select GHG Intensity Clusters to Display:",
+                choices=["low", "med", "high", "extreme high"],
+                selected=selected
+            )
+        
+        @render.plot(alt="Clustering DBSCAN")
+        def plot_cluster():
+            data = dat_cluster()
+            clusters_selected = [int(x) for x in input.clusters()]
+            filtered_data = data[data["GHGIntensityCluster"].isin(clusters_selected)]
+            
+            plt.figure(figsize=(8, 6))
+            for cluster in clusters_selected:
+                cluster_data = filtered_data[filtered_data["GHGIntensityCluster"] == cluster]
+                plt.scatter(cluster_data["YearBuilt"], cluster_data["GHGEmissionsIntensity"], label=f"Cluster {cluster}")
+            
+            plt.xlabel("Year Built")
+            plt.ylabel("Emissions")
+            plt.title("GHG Emissions Intensity vs Year Built")
+            plt.legend()
+            
+            return plt.gcf()
 
 
     with ui.nav_panel("Models"):
@@ -171,5 +201,10 @@ def dat():
     data = data.drop(columns=["DataYear", "ZipCode", "OSEBuildingID"]) #removing these columns because it reduces clutter
     return data
 
-
+@reactive.calc #reactive function to load the cleaned data with clusters
+def dat_cluster():
+    cleaned_data_file = Path(__file__).parent.parent / "Data 422/Seattle_Building_Clusters.csv"
+    data = pd.read_csv(cleaned_data_file)
+    data = data.drop(columns=["DataYear", "ZipCode", "OSEBuildingID"]) #removing these columns because it reduces clutter
+    return data
 
