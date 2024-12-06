@@ -20,7 +20,7 @@ selected = dtc_data["GHGIntensityCluster"].unique().astype(str)
 selected = selected.tolist()
 selected.sort()
 
-cleaned_data_file = Path(__file__).parent.parent / "Data 422/Seattle_Building_Clusters.csv"
+cleaned_data_file = Path(__file__).parent.parent / "Data" / "Seattle_Building_Clusters.csv"
 data = pd.read_csv(cleaned_data_file)
 data = data.drop(columns=["DataYear", "ZipCode", "OSEBuildingID", "GHGEmissionsIntensity", "GHGIntensityCluster", "Latitude", "Longitude"]) 
 numerical_columns = data.select_dtypes(include=["number"]).columns.tolist()
@@ -235,7 +235,7 @@ def dat():
 
 @reactive.calc #reactive function to load the cleaned data with clusters
 def dat_cluster():
-    cleaned_data_file = Path(__file__).parent.parent / "Data 422/Seattle_Building_Clusters.csv"
+    cleaned_data_file = Path(__file__).parent.parent / "Data" / "Seattle_Building_Clusters.csv"
     data = pd.read_csv(cleaned_data_file)
     data = data.drop(columns=["DataYear", "ZipCode", "OSEBuildingID"]) #removing these columns because it reduces clutter
     return data
