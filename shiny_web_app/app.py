@@ -13,6 +13,9 @@ dtc_data = dtc_data.dropna()
 X = dtc_data[['Electricity(kBtu)', 'SteamUse(kBtu)', 'NaturalGas(kBtu)', 'PropertyGFATotal', 'SourceEUI(kBtu/sf)']]
 y = dtc_data[['GHGIntensityCluster']]
 
+choices = dtc_data["GHGIntensityCluster"].unique().astype(str)
+choices = choices.tolist()
+choices.sort()
 selected = dtc_data["GHGIntensityCluster"].unique().astype(str)
 selected = selected.tolist()
 selected.sort()
@@ -95,7 +98,7 @@ with ui.navset_pill(id="tab"):
         ui.input_checkbox_group(
                 "clusters",
                 "Select GHG Intensity Clusters to Display:",
-                choices=["low", "med", "high", "extreme high"],
+                choices=choices,
                 selected=selected
             )
         
