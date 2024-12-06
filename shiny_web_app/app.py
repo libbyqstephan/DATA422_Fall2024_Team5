@@ -20,6 +20,11 @@ selected = dtc_data["GHGIntensityCluster"].unique().astype(str)
 selected = selected.tolist()
 selected.sort()
 
+cleaned_data_file = Path(__file__).parent.parent / "Data 422/Seattle_Building_Clusters.csv"
+data = pd.read_csv(cleaned_data_file)
+data = data.drop(columns=["DataYear", "ZipCode", "OSEBuildingID", "GHGEmissionsIntensity", "GHGIntensityCluster", "Latitude", "Longitude"]) 
+numerical_columns = data.select_dtypes(include=["number"]).columns.tolist()
+
 ui.panel_title("Team 5 Shiny Web App")
 
 with ui.navset_pill(id="tab"):  
@@ -117,6 +122,30 @@ with ui.navset_pill(id="tab"):
             plt.ylabel("Emissions")
             plt.title("GHG Emissions Intensity vs Year Built")
             plt.legend()
+            
+            return plt.gcf()
+
+        # interactive scatter against GHGIntensity
+        ui.input_radio_buttons(
+            "x_axis",
+            "Select X-axis Variable:",
+            choices=numerical_columns,
+            selected="YearBuilt"
+            )
+
+        @render.plot
+        def plot():
+            data = dat_cluster()
+            x_var = input.x_axis()
+            if x_var not in numerical_columns:
+                return None
+            
+            plt.figure(figsize=(8, 6))
+            plt.scatter(data[x_var], data["GHGEmissionsIntensity"], color="blue", alpha=0.7)
+            plt.xlabel(x_var)
+            plt.ylabel("GHG Emissions Intensity")
+            plt.title(f"GHG Emissions Intensity vs {x_var}")
+            plt.grid(True)
             
             return plt.gcf()
 
